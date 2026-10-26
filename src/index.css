@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* Dark mode is switched by adding class="dark" to <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Change these to rebrand the whole site */
+@theme {
+  --color-accent: #0277e6;
+  --color-accent-2: #13b9fd;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  @apply bg-white text-slate-900 antialiased transition-colors duration-300 dark:bg-[#0b0c14] dark:text-slate-100;
+}
+
+/* Infinite scrolling strip (Skills section) */
+@keyframes marquee {
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}

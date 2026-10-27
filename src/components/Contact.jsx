@@ -4,6 +4,11 @@ import Reveal, { SectionHeading } from "./Reveal.jsx";
 import { profile } from "../data.js";
 
 const linkedin = profile.socials.find((s) => s.label === "LinkedIn");
+
+// Opens Gmail's compose window with the address and subject filled in
+const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}&su=${encodeURIComponent(
+  "Hello Zahid — from your portfolio"
+)}`;
 const github = profile.socials.find((s) => s.label === "GitHub");
 
 function ContactCard({ href, icon, iconClass, label, value, cta, external, delay, children }) {
@@ -70,7 +75,8 @@ export default function Contact() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           <ContactCard
-            href={`mailto:${profile.email}`}
+            href={gmailUrl}
+            external
             icon={MailIcon}
             iconClass="bg-gradient-to-br from-accent to-accent-2 shadow-accent/30"
             label="Email"

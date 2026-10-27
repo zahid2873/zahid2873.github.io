@@ -49,9 +49,10 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-[70px] max-w-6xl items-center justify-between px-4">
-        <a href="#home" className="font-mono text-lg font-bold text-accent">
-          &lt;{profile.initials} /&gt;
-        </a>
+        <motion.a href="#home" whileHover={{ scale: 1.05 }} className="flex items-center gap-2.5" aria-label="Back to top">
+          <img src="logo-mark.png" alt={`${profile.name} logo`} className="h-10 w-10 rounded-xl shadow-md shadow-accent/20" />
+          <span className="hidden font-extrabold tracking-[0.18em] uppercase sm:block">{profile.name}</span>
+        </motion.a>
 
         <nav className="hidden gap-8 md:flex">
           {links.map((link) => {

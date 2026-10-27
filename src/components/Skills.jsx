@@ -22,13 +22,13 @@ function BentoCard({ children, className = "", delay = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className={`group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none ${className}`}
+      className={`group relative min-w-0 overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/50 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none ${className}`}
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{ background: "radial-gradient(420px circle at var(--x) var(--y), rgb(2 119 230 / 0.12), transparent 45%)" }}
       />
-      <div className="relative h-full">{children}</div>
+      <div className="relative h-full min-w-0">{children}</div>
     </motion.div>
   );
 }
@@ -87,7 +87,8 @@ function highlight(line) {
   });
 }
 
-function CodeWindow({ code, file, replayKey = 0, className = "" }) {
+// playOnMount: animate right away instead of waiting to be scrolled into view
+function CodeWindow({ code, file, replayKey = 0, className = "", playOnMount = false }) {
   const lines = code.split("\n");
   return (
     <div className={`overflow-hidden rounded-2xl bg-slate-950 font-mono text-[12px] leading-relaxed shadow-xl ring-1 ring-slate-800 ${className}`}>
@@ -102,13 +103,12 @@ function CodeWindow({ code, file, replayKey = 0, className = "" }) {
           <motion.div
             key={`${replayKey}-${i}`}
             initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            {...(playOnMount ? { animate: { opacity: 1, x: 0 } } : { whileInView: { opacity: 1, x: 0 }, viewport: { once: true } })}
             transition={{ delay: i * 0.07, duration: 0.3 }}
             className="flex"
           >
             <span className="mr-4 w-5 shrink-0 text-right text-slate-600 select-none">{i + 1}</span>
-            <span className="whitespace-pre">{highlight(line) }</span>
+            <span className="whitespace-pre">{highlight(line)}</span>
           </motion.div>
         ))}
       </pre>
@@ -132,7 +132,7 @@ function CoreCard() {
   return (
     <BentoCard className="md:col-span-2 lg:col-span-4">
       <div className="grid h-full gap-6 lg:grid-cols-[1fr_1.15fr]">
-        <div className="flex flex-col">
+        <div className="flex min-w-0 flex-col">
           <div className="flex gap-3">
             {core.logos.map((l, i) => (
               <motion.div
@@ -155,13 +155,13 @@ function CoreCard() {
             onClick={hotReload}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.94 }}
-            className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-bold text-slate-900 shadow-lg shadow-amber-400/30 lg:mt-auto"
+            className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-bold text-slate-900 shadow-lg shadow-amber-400/30"
           >
             ⚡ Hot reload
           </motion.button>
         </div>
 
-        <div className="relative">
+        <div className="relative min-w-0">
           <CodeWindow code={core.code} file="lib/main.dart" replayKey={reloads} />
           <AnimatePresence>
             {toast && (
@@ -183,9 +183,9 @@ function CoreCard() {
 
 function PlatformsCard() {
   return (
-    <BentoCard className="lg:col-span-2" delay={0.1}>
+    <BentoCard className="md:col-span-2 lg:col-span-2" delay={0.1}>
       <CardTitle icon="📱" title="Ships to" subtitle="One codebase, three platforms" />
-      <div className="grid gap-3">
+      <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-1">
         {skills.platforms.map((p, i) => (
           <motion.div
             key={p.name}
@@ -229,7 +229,7 @@ function StateCard() {
   return (
     <BentoCard className="md:col-span-2 lg:col-span-3">
       <CardTitle icon="🧠" title="State management" subtitle={note} />
-      <div className="mb-4 inline-flex rounded-full bg-slate-100 p-1 dark:bg-slate-800">
+      <div className="mb-4 inline-flex max-w-full flex-wrap rounded-full bg-slate-100 p-1 dark:bg-slate-800">
         {options.map((o, i) => (
           <button
             key={o.name}
@@ -237,7 +237,7 @@ function StateCard() {
               setActive(i);
               setAuto(false);
             }}
-            className={`relative rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
+            className={`relative rounded-full px-3 py-1.5 text-sm font-semibold transition-colors sm:px-4 ${
               active === i ? "text-white" : "text-slate-500 hover:text-accent dark:text-slate-400"
             }`}
           >
@@ -264,6 +264,7 @@ function StateCard() {
             code={options[active].code}
             file={`cart_${options[active].name.toLowerCase()}.dart`}
             className="min-h-[230px]"
+            playOnMount
           />
         </motion.div>
       </AnimatePresence>

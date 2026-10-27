@@ -7,9 +7,16 @@ export default function Footer() {
         <p>
           © {new Date().getFullYear()} {profile.name}. Crafted like an app with React & Motion.
         </p>
-        <a href="#home" className="hover:text-accent">
-          Back to top ↑
-        </a>
+        <div className="flex gap-5">
+          {profile.socials.map((s) => (
+            <a key={s.label} href={s.url} target="_blank" rel="noopener" className="hover:text-accent">
+              {s.label}
+            </a>
+          ))}
+          <a href="#home" className="hover:text-accent">
+            Back to top ↑
+          </a>
+        </div>
       </div>
     </footer>
   );

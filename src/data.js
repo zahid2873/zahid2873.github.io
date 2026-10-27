@@ -6,7 +6,8 @@
 export const profile = {
   name: "Zahid Hasan",
   initials: "ZH",
-  title: "Flutter Developer",
+  title: "Mobile Application Developer",
+  subtitle: "Flutter Developer",
   // Words shown one by one in the hero ("I build ...")
   roles: ["Flutter apps.", "pixel-perfect UIs.", "real-time features.", "cross-platform magic."],
   intro:
@@ -14,7 +15,6 @@ export const profile = {
   photo: "profile.jpg", // file in the "public" folder
   resume: "Zahid_Hasan_Resume.pdf", // file in the "public" folder
   email: "mahdi.zhm13@gmail.com",
-  phone: "+880 1783 864132",
   location: "Dhaka, Bangladesh",
   socials: [
     { label: "GitHub", url: "https://github.com/zahid2873" },

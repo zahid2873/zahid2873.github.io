@@ -85,6 +85,7 @@ export function ProfileScreen() {
       </div>
       <p className="mt-2 text-center text-base font-bold">{profile.name}</p>
       <p className="text-center text-[11px] font-semibold text-accent">{profile.title}</p>
+      <p className="text-center text-[10px] text-slate-500">{profile.subtitle}</p>
 
       <div className="mt-3 grid grid-cols-3 gap-2 px-4">
         {stats.map(([value, label]) => (
@@ -103,7 +104,7 @@ export function ProfileScreen() {
             initial={{ x: 60, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: SPLASH_MS / 1000 + 0.6 + i * 0.15, type: "spring", stiffness: 200, damping: 20 }}
-            className="flex items-center gap-2 rounded-xl bg-white p-2 shadow-sm ring-1 ring-slate-100"
+            className="flex min-w-0 items-center gap-2 rounded-xl bg-white p-2 shadow-sm ring-1 ring-slate-100"
           >
             <span className="grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-accent to-accent-2 text-[11px] font-bold text-white">
               {p.title[0]}

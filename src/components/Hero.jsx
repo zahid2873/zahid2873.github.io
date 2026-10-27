@@ -72,13 +72,13 @@ export default function Hero() {
         <motion.div variants={container} initial="hidden" animate="show" className="text-center md:text-left">
           <motion.span
             variants={item}
-            className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent"
+            className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-sm font-semibold text-emerald-600 dark:text-emerald-400"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
-            {profile.title} · Open to opportunities
+            Open to opportunities
           </motion.span>
           <motion.p variants={item} className="mb-1 font-mono text-accent">
             Hi, I'm
@@ -86,6 +86,14 @@ export default function Hero() {
           <motion.h1 variants={item} className="text-5xl font-extrabold leading-tight sm:text-6xl lg:text-7xl">
             {profile.name}
           </motion.h1>
+          <motion.div variants={item} className="mt-4 flex flex-wrap justify-center gap-2 md:justify-start">
+            <span className="rounded-full bg-gradient-to-r from-accent to-accent-2 px-4 py-1.5 text-sm font-bold text-white shadow-lg shadow-accent/25 sm:text-base">
+              📱 {profile.title}
+            </span>
+            <span className="rounded-full border-2 border-accent/40 px-4 py-1.5 text-sm font-bold text-accent sm:text-base">
+              {profile.subtitle}
+            </span>
+          </motion.div>
           <motion.h2 variants={item} className="mt-3 text-2xl font-semibold text-slate-500 sm:text-3xl dark:text-slate-400">
             I build <RotatingRole />
           </motion.h2>
@@ -134,14 +142,14 @@ export default function Hero() {
           initial={{ opacity: 0, y: 120, rotate: 12 }}
           animate={{ opacity: 1, y: 0, rotate: 0 }}
           transition={{ type: "spring", stiffness: 60, damping: 14, delay: START }}
-          className="order-first flex justify-center md:order-none"
+          className="flex justify-center"
         >
           <motion.div
             animate={{ y: [0, -14, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             className="relative"
           >
-            <motion.div {...tilt} className="w-[260px] sm:w-[280px]">
+            <motion.div {...tilt} className="w-[240px] sm:w-[280px]">
               <PhoneFrame>
                 <ProfileScreen />
               </PhoneFrame>

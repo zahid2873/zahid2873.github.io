@@ -255,18 +255,25 @@ export const projects = [
   },
 ];
 
+// A company with several roles: give it "roles" (newest first).
+// start / end are "YYYY-MM"; leave end out for a current role — durations are calculated automatically.
 export const experience = [
   {
-    date: "Aug 2023 — Present",
-    title: "Mobile Application Developer (Flutter)",
-    place: "Codixel · Mohammadpur, Dhaka",
+    company: "Codixel",
+    logo: "C",
+    place: "Mohammadpur, Dhaka",
+    roles: [
+      { title: "Mobile Application Developer", type: "Full-time", start: "2025-03" },
+      { title: "Jr Mobile Application Developer", type: "Full-time", start: "2023-11", end: "2025-03" },
+      { title: "Jr Mobile Application Developer", type: "Internship · On-site", start: "2023-08", end: "2023-10" },
+    ],
     description:
       "Design and build responsive Flutter apps from Figma / Adobe XD, integrate REST APIs and WebSockets, and test with unit, widget and integration tests.",
     bullets: [
-      "Deployed multiple apps on Google Play and the App Store",
+      "Deployed multiple apps on Google Play, the App Store and the Microsoft Store",
       "Built chatbot, audio streaming, online exams, in-app purchases, bKash & SSLCommerz",
       "Maintained 99%+ crash-free user sessions",
-      "Promoted from intern to full-time within 3 months",
+      "Intern → full-time in 3 months, promoted to Mobile Application Developer in 2025",
     ],
   },
   {

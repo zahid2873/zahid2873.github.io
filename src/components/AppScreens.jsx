@@ -1,7 +1,7 @@
 // Animated fake app screens shown inside the phone mockups.
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { notifications, profile, projects } from "../data.js";
+import { notifications, profile, projects, yearsOfExperience } from "../data.js";
 import { SPLASH_MS } from "./Splash.jsx";
 
 function useCycle(length, ms, startDelay = 0) {
@@ -34,7 +34,7 @@ export function ProfileScreen() {
   const n = useCycle(notifications.length, 3500, SPLASH_MS + 1500);
   const note = notifications[n];
   const stats = [
-    ["3+", "Years"],
+    [`${yearsOfExperience}+`, "Years"],
     ["5+", "Live apps"],
     ["99%", "Crash-free"],
   ];
@@ -140,6 +140,8 @@ function BottomNav() {
 }
 
 /* ---------------- EarningsCall: audio player ---------------- */
+const now = new Date();
+const currentQuarter = `Q${Math.floor(now.getMonth() / 3) + 1} ${now.getFullYear()}`;
 const bars = Array.from({ length: 30 }, (_, i) => 0.3 + 0.7 * Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.5)));
 const transcript = [
   ["Operator", "Good afternoon and welcome to the Q3 earnings call."],
@@ -152,7 +154,7 @@ export function AudioScreen() {
   const line = useCycle(transcript.length, 2200);
   return (
     <div className="flex h-full flex-col bg-slate-950 text-white">
-      <AppBar title="EarningsCall" right={<span className="text-[10px] text-sky-300">Q3 2026</span>} />
+      <AppBar title="EarningsCall" right={<span className="text-[10px] text-sky-300">{currentQuarter}</span>} />
 
       <div className="mx-4 mt-1 flex items-center gap-3 rounded-2xl bg-white/5 p-3">
         <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-sky-400 to-indigo-500 text-xs font-extrabold">

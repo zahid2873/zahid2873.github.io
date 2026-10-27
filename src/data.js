@@ -3,6 +3,14 @@
 //  Edit this file and the site updates automatically.
 // ============================================================
 
+// Experience is counted from this month ("YYYY-MM"), so "3+ years" grows by itself over time
+const CAREER_START = "2023-08";
+const today = new Date();
+const [startYear, startMonth] = CAREER_START.split("-").map(Number);
+export const yearsOfExperience = Math.floor(
+  ((today.getFullYear() - startYear) * 12 + today.getMonth() + 1 - startMonth) / 12
+);
+
 export const profile = {
   name: "Zahid Hasan",
   initials: "ZH",
@@ -11,7 +19,7 @@ export const profile = {
   // Words shown one by one in the hero ("I build ...")
   roles: ["Flutter apps.", "pixel-perfect UIs.", "real-time features.", "cross-platform magic."],
   intro:
-    "Mobile Application Developer with 3+ years of experience crafting cross-platform apps with Flutter — live on Google Play, the App Store and the Microsoft Store.",
+    `Mobile Application Developer with ${yearsOfExperience}+ years of experience crafting cross-platform apps with Flutter — live on Google Play, the App Store and the Microsoft Store.`,
   photo: "profile.jpg", // file in the "public" folder
   resume: "Zahid_Hasan_Resume.pdf", // file in the "public" folder
   email: "mahdi.zhm13@gmail.com",
@@ -38,7 +46,7 @@ export const about = {
   ],
   // decimals and suffix are optional
   stats: [
-    { value: 3, suffix: "+", label: "Years of experience", icon: "⏱" },
+    { value: yearsOfExperience, suffix: "+", label: "Years of experience", icon: "⏱" },
     { value: 5, suffix: "+", label: "Apps live in stores", icon: "📱" },
     { value: 99, suffix: "%+", label: "Crash-free sessions", icon: "🛡" },
     { value: 3, suffix: " mo", label: "Intern → full-time", icon: "🚀" },
@@ -58,7 +66,7 @@ const logo = (name, variant = "original") =>
 export const skills = {
   core: {
     title: "Flutter & Dart",
-    summary: "My core stack for 3+ years — production apps built from Figma and Adobe XD designs and shipped to the stores.",
+    summary: `My core stack for ${yearsOfExperience}+ years — production apps built from Figma and Adobe XD designs and shipped to the stores.`,
     logos: [
       { name: "Flutter", logo: logo("flutter") },
       { name: "Dart", logo: logo("dart") },
@@ -265,7 +273,7 @@ export const experience = [
     roles: [
       { title: "Mobile Application Developer", type: "Full-time", start: "2025-03" },
       { title: "Jr Mobile Application Developer", type: "Full-time", start: "2023-11", end: "2025-03" },
-      { title: "Jr Mobile Application Developer", type: "Internship · On-site", start: "2023-08", end: "2023-10" },
+      { title: "Jr Mobile Application Developer", type: "Internship · On-site", start: CAREER_START, end: "2023-10" },
     ],
     description:
       "Design and build responsive Flutter apps from Figma / Adobe XD, integrate REST APIs and WebSockets, and test with unit, widget and integration tests.",
